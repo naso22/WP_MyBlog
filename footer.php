@@ -32,4 +32,5 @@
     <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
     <script src="<?php echo get_template_directory_uri(); ?>/asset/js/slide.js"></script>
     <script src="<?php echo get_template_directory_uri(); ?>/asset/js/hamberger.js"></script>
+    <script src="<?php echo get_template_directory_uri(); ?>/asset/js/tab.js"></script>
     <?php wp_footer(); ?>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<?get_header(); ?>
+<? get_header(); ?>
 
 <body>
     <header class="header">
@@ -56,78 +56,175 @@
         <div class="content__inner">
             <main>
                 <div class="post-tab">
-                    <div class="tab1">人気記事</div>
-                    <div class="tab2">プログラミング</div>
-                    <div class="tab3">デザイン</div>
-                    <div class="tab4">WordPress</div>
+                    <div class="tab1 tab-title selected">人気記事</div>
+                    <div class="tab2 tab-title">プログラミング</div>
+                    <div class="tab3 tab-title">デザイン</div>
+                    <div class="tab4 tab-title">WordPress</div>
+                </div>
+
+                <div class="post show">
+                    <div class="post__inner">
+                        <?php
+                        $newslist = get_posts(array(
+                            'category_name' => '人気記事',
+                            'posts_per_page' => 6
+                        ));
+                        foreach ($newslist as $post) :
+                            setup_postdata($post);
+                        ?>
+                            <div class="l-wrapper_02 card-radius_02">
+                                <a href="<?php the_permalink(); ?>">
+                                    <article class="card_02">
+                                        <div class="card__header_02">
+                                            <figure class="card__thumbnail_02">
+                                                <?php the_post_thumbnail('full', array('class' => 'card__image_02')); ?>
+                                            </figure>
+                                            <time class="card__day" datetime="<?php the_time('Y-m-d'); ?>"><?php the_time('Y.m.d'); ?></time>
+                                            <p class="card__title_02"><?php the_title(); ?></p>
+                                            <ul>
+                                                <li class="post-tag">
+                                                    <span>
+                                                        <?php
+                                                        $tags = get_the_tags();
+                                                        if ($tags) {
+                                                            $first_tag = reset($tags);
+                                                            echo '#' . $first_tag->name;
+                                                        }
+                                                        ?>
+                                                    </span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </article>
+                                </a>
+                            </div>
+                        <?php endforeach;
+                        wp_reset_postdata(); ?>
+                    </div>
                 </div>
 
                 <div class="post">
                     <div class="post__inner">
-                        <div class="l-wrapper_02 card-radius_02">
-                            <article class="card_02">
-                                <div class="card__header_02">
-                                    <figure class="card__thumbnail_02">
-                                        <img src="https://dubdesign.net/wp-content/uploads/2020/05/0514_inhouse_designereyecatch.jpg"
-                                            alt="サムネイル" class="card__image_02">
-                                    </figure>
-                                    <time class="card__day">2024.01.16</time>
-                                    <p class="card__title_02">サムネイルのタイトル</p>
-                                    <ul>
-                                        <li class="post-tag">
-                                            <span>
-                                                #HTML/CSS
-                                            </span>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </article>
-                        </div>
-
-                        <div class="l-wrapper_02 card-radius_02">
-                            <article class="card_02">
-                                <div class="card__header_02">
-                                    <figure class="card__thumbnail_02">
-                                        <a href="./post.html">
-                                        <img src="https://dubdesign.net/wp-content/uploads/2020/05/0514_inhouse_designereyecatch.jpg"
-                                            alt="サムネイル" class="card__image_02">
-                                        </a>
-                                    </figure>
-                                    <time class="card__day">2024.01.16</time>
-                                    <p class="card__title_02">サムネイルのタイトル</p>
-                                    <ul>
-                                        <li class="post-tag">
-                                            <span>
-                                                #HTML/CSS
-                                            </span>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </article>
-                        </div>
-
-                        <div class="l-wrapper_02 card-radius_02">
-                            <article class="card_02">
-                                <div class="card__header_02">
-                                    <figure class="card__thumbnail_02">
-                                        <img src="https://dubdesign.net/wp-content/uploads/2020/05/0514_inhouse_designereyecatch.jpg"
-                                            alt="サムネイル" class="card__image_02">
-                                    </figure>
-                                    <time class="card__day">2024.01.16</time>
-                                    <p class="card__title_02">サムネイルのタイトル</p>
-                                    <ul>
-                                        <li class="post-tag">
-                                            <span>
-                                                #HTML/CSS
-                                            </span>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </article>
-                        </div>
+                        <?php
+                        $newslist = get_posts(array(
+                            'category_name' => 'プログラミング',
+                            'posts_per_page' => 6
+                        ));
+                        foreach ($newslist as $post) :
+                            setup_postdata($post);
+                        ?>
+                            <div class="l-wrapper_02 card-radius_02">
+                                <a href="<?php the_permalink(); ?>">
+                                    <article class="card_02">
+                                        <div class="card__header_02">
+                                            <figure class="card__thumbnail_02">
+                                                <?php the_post_thumbnail('full', array('class' => 'card__image_02')); ?>
+                                            </figure>
+                                            <time class="card__day" datetime="<?php the_time('Y-m-d'); ?>"><?php the_time('Y.m.d'); ?></time>
+                                            <p class="card__title_02"><?php the_title(); ?></p>
+                                            <ul>
+                                                <li class="post-tag">
+                                                    <span>
+                                                        <?php
+                                                        $tags = get_the_tags();
+                                                        if ($tags) {
+                                                            $first_tag = reset($tags);
+                                                            echo '#' . $first_tag->name;
+                                                        }
+                                                        ?>
+                                                    </span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </article>
+                                </a>
+                            </div>
+                        <?php endforeach;
+                        wp_reset_postdata(); ?>
                     </div>
                 </div>
 
+                <div class="post">
+                    <div class="post__inner">
+                        <?php
+                        $newslist = get_posts(array(
+                            'category_name' => 'デザイン',
+                            'posts_per_page' => 6
+                        ));
+                        foreach ($newslist as $post) :
+                            setup_postdata($post);
+                        ?>
+                            <div class="l-wrapper_02 card-radius_02">
+                                <a href="<?php the_permalink(); ?>">
+                                    <article class="card_02">
+                                        <div class="card__header_02">
+                                            <figure class="card__thumbnail_02">
+                                                <?php the_post_thumbnail('full', array('class' => 'card__image_02')); ?>
+                                            </figure>
+                                            <time class="card__day" datetime="<?php the_time('Y-m-d'); ?>"><?php the_time('Y.m.d'); ?></time>
+                                            <p class="card__title_02"><?php the_title(); ?></p>
+                                            <ul>
+                                                <li class="post-tag">
+                                                    <span>
+                                                        <?php
+                                                        $tags = get_the_tags();
+                                                        if ($tags) {
+                                                            $first_tag = reset($tags);
+                                                            echo '#' . $first_tag->name;
+                                                        }
+                                                        ?>
+                                                    </span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </article>
+                                </a>
+                            </div>
+                        <?php endforeach;
+                        wp_reset_postdata(); ?>
+                    </div>
+                </div>
+
+                <div class="post">
+                    <div class="post__inner">
+                        <?php
+                        $newslist = get_posts(array(
+                            'category_name' => 'WordPress',
+                            'posts_per_page' => 6
+                        ));
+                        foreach ($newslist as $post) :
+                            setup_postdata($post);
+                        ?>
+                            <div class="l-wrapper_02 card-radius_02">
+                                <a href="<?php the_permalink(); ?>">
+                                    <article class="card_02">
+                                        <div class="card__header_02">
+                                            <figure class="card__thumbnail_02">
+                                                <?php the_post_thumbnail('full', array('class' => 'card__image_02')); ?>
+                                            </figure>
+                                            <time class="card__day" datetime="<?php the_time('Y-m-d'); ?>"><?php the_time('Y.m.d'); ?></time>
+                                            <p class="card__title_02"><?php the_title(); ?></p>
+                                            <ul>
+                                                <li class="post-tag">
+                                                    <span>
+                                                        <?php
+                                                        $tags = get_the_tags();
+                                                        if ($tags) {
+                                                            $first_tag = reset($tags);
+                                                            echo '#' . $first_tag->name;
+                                                        }
+                                                        ?>
+                                                    </span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </article>
+                                </a>
+                            </div>
+                        <?php endforeach;
+                        wp_reset_postdata(); ?>
+                    </div>
+                </div>
 
             </main>
 
@@ -137,10 +234,8 @@
                         プロフィール
                     </h4>
                     <div class="widget__inner">
-                        <div class="profiel__img"> 
-                            <img
-                                src="https://kyomoneyblog.com/wp-content/uploads/7051304f37a3653aa23d9cdad05e7688-96x96.png"
-                                alt="">
+                        <div class="profiel__img">
+                            <img src="https://kyomoneyblog.com/wp-content/uploads/7051304f37a3653aa23d9cdad05e7688-96x96.png" alt="">
                         </div>
                         <p class="widget__name">さかもと</p>
                         <div class="widget__text">
@@ -157,8 +252,7 @@
                         <li>
                             <a href="">
                                 <figure class="new-post__img">
-                                    <img src="https://kyomoneyblog.com/wp-content/uploads/%E6%AD%A3%E7%A4%BE%E5%93%A1%E7%99%BB%E7%94%A8%E8%90%BD%E3%81%A1%E3%82%8B%E4%BA%BA%E3%81%AE%E7%89%B9%E5%BE%B4-1-160x160.jpg"
-                                        alt="">
+                                    <img src="https://kyomoneyblog.com/wp-content/uploads/%E6%AD%A3%E7%A4%BE%E5%93%A1%E7%99%BB%E7%94%A8%E8%90%BD%E3%81%A1%E3%82%8B%E4%BA%BA%E3%81%AE%E7%89%B9%E5%BE%B4-1-160x160.jpg" alt="">
                                 </figure>
                                 <div class="widget__text">
                                     【経験者目線】正社員登用制度に落ちる人、受かる人の特徴は？
@@ -169,8 +263,7 @@
                         <li>
                             <a href="">
                                 <figure class="new-post__img">
-                                    <img src="https://kyomoneyblog.com/wp-content/uploads/%E6%AD%A3%E7%A4%BE%E5%93%A1%E7%99%BB%E7%94%A8%E8%90%BD%E3%81%A1%E3%82%8B%E4%BA%BA%E3%81%AE%E7%89%B9%E5%BE%B4-1-160x160.jpg"
-                                        alt="">
+                                    <img src="https://kyomoneyblog.com/wp-content/uploads/%E6%AD%A3%E7%A4%BE%E5%93%A1%E7%99%BB%E7%94%A8%E8%90%BD%E3%81%A1%E3%82%8B%E4%BA%BA%E3%81%AE%E7%89%B9%E5%BE%B4-1-160x160.jpg" alt="">
                                 </figure>
                                 <div class="widget__text">
                                     【経験者目線】正社員登用制度に落ちる人、受かる人の特徴は？
@@ -181,8 +274,7 @@
                         <li>
                             <a href="">
                                 <figure class="new-post__img">
-                                    <img src="https://kyomoneyblog.com/wp-content/uploads/%E6%AD%A3%E7%A4%BE%E5%93%A1%E7%99%BB%E7%94%A8%E8%90%BD%E3%81%A1%E3%82%8B%E4%BA%BA%E3%81%AE%E7%89%B9%E5%BE%B4-1-160x160.jpg"
-                                        alt="">
+                                    <img src="https://kyomoneyblog.com/wp-content/uploads/%E6%AD%A3%E7%A4%BE%E5%93%A1%E7%99%BB%E7%94%A8%E8%90%BD%E3%81%A1%E3%82%8B%E4%BA%BA%E3%81%AE%E7%89%B9%E5%BE%B4-1-160x160.jpg" alt="">
                                 </figure>
                                 <div class="widget__text">
                                     【経験者目線】正社員登用制度に落ちる人、受かる人の特徴は？
@@ -193,8 +285,7 @@
                         <li>
                             <a href="">
                                 <figure class="new-post__img">
-                                    <img src="https://kyomoneyblog.com/wp-content/uploads/%E6%AD%A3%E7%A4%BE%E5%93%A1%E7%99%BB%E7%94%A8%E8%90%BD%E3%81%A1%E3%82%8B%E4%BA%BA%E3%81%AE%E7%89%B9%E5%BE%B4-1-160x160.jpg"
-                                        alt="">
+                                    <img src="https://kyomoneyblog.com/wp-content/uploads/%E6%AD%A3%E7%A4%BE%E5%93%A1%E7%99%BB%E7%94%A8%E8%90%BD%E3%81%A1%E3%82%8B%E4%BA%BA%E3%81%AE%E7%89%B9%E5%BE%B4-1-160x160.jpg" alt="">
                                 </figure>
                                 <div class="widget__text">
                                     【経験者目線】正社員登用制度に落ちる人、受かる人の特徴は？
@@ -205,8 +296,7 @@
                         <li>
                             <a href="">
                                 <figure class="new-post__img">
-                                    <img src="https://kyomoneyblog.com/wp-content/uploads/%E6%AD%A3%E7%A4%BE%E5%93%A1%E7%99%BB%E7%94%A8%E8%90%BD%E3%81%A1%E3%82%8B%E4%BA%BA%E3%81%AE%E7%89%B9%E5%BE%B4-1-160x160.jpg"
-                                        alt="">
+                                    <img src="https://kyomoneyblog.com/wp-content/uploads/%E6%AD%A3%E7%A4%BE%E5%93%A1%E7%99%BB%E7%94%A8%E8%90%BD%E3%81%A1%E3%82%8B%E4%BA%BA%E3%81%AE%E7%89%B9%E5%BE%B4-1-160x160.jpg" alt="">
                                 </figure>
                                 <div class="widget__text">
                                     【経験者目線】正社員登用制度に落ちる人、受かる人の特徴は？
