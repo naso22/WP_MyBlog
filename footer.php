@@ -7,7 +7,6 @@
             <div class="footer-content">
               <p class="footer__navi-heading">FOLLOW US</p>
               <ul class="footer__navi">
-                <li><a href="#">Facebook</a></li>
                 <li><a href="#">Twitter</a></li>
                 <li><a href="#">Instagram</a></li>
               </ul>
@@ -15,7 +14,6 @@
             <div class="footer-content">
               <p class="footer__navi-heading">ABOUT</p>
               <ul class="footer__navi">
-                <li><a href="#">会社概要</a></li>
                 <li><a href="#">お問い合わせ</a></li>
                 <li><a href="#">サイトマップ</a></li>
                 <li><a href="#">プライバシーポリシー</a></li>

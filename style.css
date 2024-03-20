@@ -338,7 +338,7 @@ main {
 }
 
 .post-main {
-  margin-top: 5em;
+  margin-top: 3em;
 }
 
 @media screen and (max-width: 780px) {
@@ -399,10 +399,10 @@ main {
 
 .new-post__img {
   display: table-cell;
-  height: 88px;
+  height: 70px;
   padding-right: 8px;
   vertical-align: middle;
-  width: 88px;
+  width: 100px;
 }
 .new-post__img img {
   height: auto;
@@ -566,4 +566,5 @@ div.article-head div.thum {
 div.article-head div.thum img {
   object-fit: cover;
   width: 100%;
+  height: auto;
 }/*# sourceMappingURL=style.css.map */
