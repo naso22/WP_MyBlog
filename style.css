@@ -1,4 +1,5 @@
 @charset "UTF-8";
+
 header {
   background-color: #ffffff;
   padding-bottom: 15px;
@@ -193,6 +194,7 @@ header {
 body {
   font-family: "Noto Sans JP", sans-serif;
   background-color: #F4F4F4;
+  color: #333;
 }
 
 main {
@@ -440,6 +442,47 @@ main {
 .profiel {
   text-align: center;
 }
+
+
+.Form {
+  padding-top: 20px;
+  border-radius: 5px; /* 角を丸める */
+}
+
+/* フォーム項目のスタイル */
+.Form-Item {
+  margin-bottom: 20px; /* 各フォーム項目の下に余白を追加 */
+}
+
+/* 必須ラベルのスタイル */
+.Form-Item-Label {
+  padding-bottom: 10px;
+}
+
+/* フォーム入力フィールドのスタイル */
+.wpcf7-form-control {
+  width: 100%; /* 入力フィールドを幅いっぱいに広げる */
+  padding: 10px; /* 内側の余白を追加 */
+  border: 1px solid #ccc; /* ボーダーを追加 */
+  border-radius: 3px; /* 角を丸める */
+  box-sizing: border-box; /* ボックスサイジングを設定 */
+}
+
+/* 送信ボタンのスタイル */
+.wpcf7-submit {
+  background-color: #235C9B; /* ボタンの背景色を青にする */
+  color: white; /* テキストの色を白にする */
+  border: none; /* ボーダーをなくす */
+  padding: 10px 20px; /* 上下左右の余白を追加 */
+  border-radius: 3px; /* 角を丸める */
+  cursor: pointer; /* カーソルをポインターに変更 */
+}
+
+/* チェックボックスのスタイル */
+.wpcf7-checkbox {
+  margin-right: 10px; /* チェックボックス間の間隔を追加 */
+}
+
 
 @media screen and (max-width: 780px) {
   .insidesp {

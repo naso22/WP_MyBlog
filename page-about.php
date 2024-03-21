@@ -1,3 +1,9 @@
+<?php
+/*
+Template Name: このサイトについて
+*/
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -16,7 +22,7 @@
                     <ul class="header-nav-list">
                         <li class="header-nav-list__item"><a href="<?php echo home_url(); ?>">ホーム</a></li>
                         <li class="header-nav-list__item"><a href="">サイト概要</a></li>
-                        <li class="header-nav-list__item"><a href="">お問い合わせ</a></li>
+                        <li class="header-nav-list__item"><a href="<?php echo $contact_page_url; ?>">お問い合わせ</a></li>
                     </ul>
                 </nav>
 
@@ -33,51 +39,7 @@
     <div class="content">
         <div class="content__inner">
             <main class="post-main">
-                <ol class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
-                    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-                        <a itemprop="item" href="ホームのURL">
-                            <span itemprop="name">ホーム</span>
-                        </a>
-                        <meta itemprop="position" content="1" />
-                    </li>
-
-                    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-                        <a itemprop="item" href="カテゴリー1のURL">
-                            <span itemprop="name">カテゴリー1</span>
-                        </a>
-                        <meta itemprop="position" content="2" />
-                    </li>
-
-                    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-                        <a itemprop="item" href="カテゴリー2のURL">
-                            <span itemprop="name">カテゴリー2</span>
-                        </a>
-                        <meta itemprop="position" content="3" />
-                    </li>
-                </ol>
-
-                <section>
-                    <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
-                            <article class="article__wrapper">
-                                <div class="article-head">
-                                    <ul>
-                                        <li>
-                                            <time class="article__time" datetime="<?php echo esc_attr(get_the_date('Y-m-d')); ?>"><?php echo esc_html(get_the_time('Y-m-d')); ?></time>
-                                        </li>
-                                    </ul>
-
-                                    <h1>
-                                        <?php the_title(); ?>
-                                    </h1>
-
-                                    <div class="thum">
-                                        <?php the_content(); ?>
-                                    </div>
-                                </div>
-                            </article>
-                    <?php endwhile;
-                    endif; ?>
-                </section>
+                <?php the_content(); ?>
             </main>
 
             <aside class="insidesp">
@@ -91,9 +53,8 @@
                         </div>
                         <p class="widget__name">さかもと</p>
                         <div class="widget__text">
-                            テキストテキストテキストテキ
-                            ストテキストテキストテキストテ
-                            キストテキストテキスト
+                            都内でフロントエンジニアとして働いています。<br />
+                            本サイトではフロントエンドを中心に情報を発信しています
                         </div>
                     </div>
 

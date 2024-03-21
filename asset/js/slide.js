@@ -4,7 +4,7 @@ const swiper = new Swiper(".swiper", {
     slidesPerView: 1.2,
     spaceBetween: 20,
     centeredSlides: true,
-    pagination: {                       //ページネーション（ドット）
+    pagination: {
         el: '.swiper-pagination',
     },
     breakpoints: {
