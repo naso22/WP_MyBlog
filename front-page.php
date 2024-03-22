@@ -5,45 +5,18 @@
 
 <body>
     <header class="header">
-        <div class="header__content">
-            <div class="header__inner">
-                <h1 class="header-logo">
-                    <a href="<?php echo home_url(); ?>">Front Blog</a>
-                </h1>
-
-                <div class="drawer_bg"></div>
-                <nav class="header-nav">
-                    <ul class="header-nav-list">
-                        <li class="header-nav-list__item"><a href="<?php echo home_url(); ?>">ホーム</a></li>
-                        <li class="header-nav-list__item"><a href="">サイト概要</a></li>
-                        <li class="header-nav-list__item"><a href="<?php echo esc_url( home_url( '/' ) ); ?>contact">お問い合わせ</a></li>
-                    </ul>
-                </nav>
-
-                <div class="header-toggle">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
-
-            </div>
-        </div>
-
+        <?php get_template_part('header-menu'); ?>
         <div class="first-view">
             <div class="swiper">
-                <!-- スライド要素を包む要素 -->
                 <div class="swiper-wrapper">
-                    <!-- 各スライド -->
                     <div class="swiper-slide">
-                        <img src="https://pengi-n.co.jp/blog/wp-content/themes/penginblog/assets/img/front/kv01.png" alt="">
+                        <img src="<?php echo get_template_directory_uri(); ?>/asset/img/noname.png" alt="">
                     </div>
                     <div class="swiper-slide">
-                        <img src="https://pengi-n.co.jp/blog/wp-content/themes/penginblog/assets/img/front/kv01.png" alt="">
-
+                        <img src="<?php echo get_template_directory_uri(); ?>/asset/img/noname.png" alt="">
                     </div>
                     <div class="swiper-slide">
-                        <img src="https://pengi-n.co.jp/blog/wp-content/themes/penginblog/assets/img/front/kv01.png" alt="">
-
+                        <img src="<?php echo get_template_directory_uri(); ?>/asset/img/noname.png" alt="">
                     </div>
                 </div>
                 <div class="swiper-pagination"></div>
@@ -56,13 +29,88 @@
         <div class="content__inner">
             <main>
                 <div class="post-tab">
-                    <div class="tab1 tab-title selected">人気記事</div>
-                    <div class="tab2 tab-title">プログラミング</div>
-                    <div class="tab3 tab-title">デザイン</div>
-                    <div class="tab4 tab-title">WordPress</div>
+                    <div class="tab1 tab-title selected">最新記事</div>
+                    <div class="tab2 tab-title">人気記事</div>
+                    <div class="tab3 tab-title">プログラミング</div>
+                    <div class="tab4 tab-title">デザイン</div>
                 </div>
 
                 <div class="post show">
+                    <div class="post__inner">
+                        <?php
+                        $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
+                        $the_query = new WP_Query(array(
+                            'post_status' => 'publish',
+                            'post_type' => 'post', //　ページの種類（例、page、post、カスタム投稿タイプ名）
+                            'paged' => $paged,
+                            'posts_per_page' => 6, // 表示件数
+                            'orderby'     => 'date',
+                            'order' => 'DESC'
+                        ));
+                        if ($the_query->have_posts()) :
+                            while ($the_query->have_posts()) : $the_query->the_post();
+                        ?>
+                                <div class="l-wrapper_02 card-radius_02">
+                                    <a href="<?php the_permalink(); ?>">
+                                        <article class="card_02">
+                                            <div class="card__header_02">
+                                                <figure class="card__thumbnail_02">
+                                                    <?php the_post_thumbnail('full', array('class' => 'card__image_02')); ?>
+                                                </figure>
+                                                <time class="card__day" datetime="<?php the_time('Y-m-d'); ?>"><?php the_time('Y.m.d'); ?></time>
+                                                <p class="card__title_02"><?php the_title(); ?></p>
+                                                <ul>
+                                                    <li class="post-tag">
+                                                        <span>
+                                                            <?php
+                                                            $tags = get_the_tags();
+                                                            if ($tags) {
+                                                                $first_tag = reset($tags);
+                                                                echo '#' . $first_tag->name;
+                                                            }
+                                                            ?>
+                                                        </span>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </article>
+                                    </a>
+                                </div>
+                        <?php
+                            endwhile;
+                        else :
+                            echo '<div><p>ありません。</p></div>';
+                        endif;
+                        ?>
+                        </ul>
+                    </div>
+
+                    <div class="pagination">
+                        <?php
+                        global $wp_rewrite;
+                        $paginate_base = get_pagenum_link(1);
+                        if (strpos($paginate_base, '?') || !$wp_rewrite->using_permalinks()) {
+                            $paginate_format = '';
+                            $paginate_base = add_query_arg('paged', '%#%');
+                        } else {
+                            $paginate_format = (substr($paginate_base, -1, 1) == '/' ? '' : '/') .
+                                user_trailingslashit('page/%#%/', 'paged');
+                            $paginate_base .= '%_%';
+                        }
+                        echo paginate_links(array(
+                            'base' => $paginate_base,
+                            'format' => $paginate_format,
+                            'total' => $the_query->max_num_pages,
+                            'mid_size' => 1,
+                            'current' => ($paged ? $paged : 1),
+                            'prev_text' => '<',
+                            'next_text' => '>',
+                        ));
+                        ?>
+                    </div>
+                </div>
+
+                <div class="post">
                     <div class="post__inner">
                         <?php
                         $args = array(
@@ -112,6 +160,7 @@
                     </div>
                 </div>
 
+
                 <div class="post">
                     <div class="post__inner">
                         <?php
@@ -119,8 +168,7 @@
                             'category_name' => 'プログラミング',
                             'posts_per_page' => 6
                         ));
-
-                        if ($newslist) {
+                        if ($newslist) :
                             foreach ($newslist as $post) :
                                 setup_postdata($post);
                         ?>
@@ -152,54 +200,7 @@
                                 </div>
                         <?php endforeach;
                             wp_reset_postdata();
-                        } else {
-                            echo '<p>まだ記事はありません。</p>';
-                        }
-                        ?>
-                    </div>
-                </div>
-
-
-                <div class="post">
-                    <div class="post__inner">
-                        <?php
-                        $newslist = get_posts(array(
-                            'category_name' => 'デザイン',
-                            'posts_per_page' => 6
-                        ));
-                        if ($newslist) : // 記事がある場合
-                            foreach ($newslist as $post) :
-                                setup_postdata($post);
-                        ?>
-                                <div class="l-wrapper_02 card-radius_02">
-                                    <a href="<?php the_permalink(); ?>">
-                                        <article class="card_02">
-                                            <div class="card__header_02">
-                                                <figure class="card__thumbnail_02">
-                                                    <?php the_post_thumbnail('full', array('class' => 'card__image_02')); ?>
-                                                </figure>
-                                                <time class="card__day" datetime="<?php the_time('Y-m-d'); ?>"><?php the_time('Y.m.d'); ?></time>
-                                                <p class="card__title_02"><?php the_title(); ?></p>
-                                                <ul>
-                                                    <li class="post-tag">
-                                                        <span>
-                                                            <?php
-                                                            $tags = get_the_tags();
-                                                            if ($tags) {
-                                                                $first_tag = reset($tags);
-                                                                echo '#' . $first_tag->name;
-                                                            }
-                                                            ?>
-                                                        </span>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </article>
-                                    </a>
-                                </div>
-                        <?php endforeach;
-                            wp_reset_postdata();
-                        else : // 記事がない場合
+                        else :
                             echo '<p>まだ記事はありません。</p>';
                         endif;
                         ?>
@@ -211,7 +212,7 @@
                     <div class="post__inner">
                         <?php
                         $newslist = get_posts(array(
-                            'category_name' => 'WordPress',
+                            'category_name' => 'デザイン',
                             'posts_per_page' => 6
                         ));
                         if ($newslist) :
@@ -257,52 +258,7 @@
 
             </main>
 
-            <aside class="insidesp">
-                <div class="widget">
-                    <h4 class="widget__title profiel">
-                        プロフィール
-                    </h4>
-                    <div class="widget__inner">
-                        <div class="profiel__img">
-
-                        </div>
-                        <p class="widget__name">さかもと</p>
-                        <div class="widget__text">
-                            都内でフロントエンジニアとして働いています。<br />
-                            本サイトではフロントエンドを中心に情報を発信しています
-                        </div>
-                    </div>
-
-                </div>
-                <div class="widget new-post">
-                    <h4 class="widget__title">最新記事</h4>
-                    <ul class="show_num">
-                        <?php
-                        $args = array(
-                            'post_type' => 'post',
-                            'posts_per_page' => 5,
-                            'orderby' => 'date',
-                            'order' => 'DESC'
-                        );
-                        $the_query = new WP_Query($args);
-                        if ($the_query->have_posts()) : ?>
-                            <?php while ($the_query->have_posts()) : $the_query->the_post(); ?>
-                                <li>
-                                    <a href="<?php the_permalink(); ?>">
-                                        <figure class="new-post__img">
-                                            <?php the_post_thumbnail('full'); ?>
-                                        </figure>
-                                        <div class="widget__text">
-                                            【<?php the_title(); ?>
-                                        </div>
-                                    </a>
-                                </li>
-                            <?php endwhile; ?>
-                        <?php endif; ?>
-                        <?php wp_reset_postdata(); ?>
-                    </ul>
-                </div>
-            </aside>
+            <?php get_sidebar(); ?>
 
         </div>
     </div>

@@ -72,18 +72,14 @@ header {
 }
 
 .swiper {
-  /*スライダーの幅と高さを調整*/
   margin: 8rem auto 2rem;
   padding-bottom: 40px;
 }
 
 .swiper-slide {
-  /*スライド要素の幅と高さを調整*/
-  /*テキストの位置調整*/
   display: flex;
   justify-content: center;
   align-items: center;
-  /*テキストの色と太さを指定*/
   color: #fff;
   font-weight: bold;
 }
@@ -99,7 +95,6 @@ header {
   .header-toggle {
     display: block;
     position: fixed;
-    /* bodyに対しての絶対位置指定 */
     width: 42px;
     height: 42px;
     cursor: pointer;
@@ -127,13 +122,9 @@ header {
     width: 40px;
     border-bottom: solid 2px #235C9B;
     -webkit-transition: 0.35s ease-in-out;
-    /*変化の速度を指定*/
     -moz-transition: 0.35s ease-in-out;
-    /*変化の速度を指定*/
     transition: 0.35s ease-in-out;
-    /*変化の速度を指定*/
   }
-  /*各ボーダー少しずつずらす*/
   .header-toggle span:nth-child(1) {
     top: 5px;
   }
@@ -145,12 +136,10 @@ header {
   }
   .header-toggle.active span:nth-child(1) {
     top: 18px;
-    /* 1番目のspanをマイナス45度に */
     -webkit-transform: rotate(-45deg);
     -moz-transform: rotate(-45deg);
     transform: rotate(-45deg);
   }
-  /* 2番目と3番目のspanを45度に */
   .header-toggle.active span:nth-child(2),
   .header-toggle.active span:nth-child(3) {
     top: 18px;
@@ -229,6 +218,7 @@ main {
   text-align: center;
   width: 100%;
   color: #fff;
+  letter-spacing: 2px;
 }
 
 .post-tab .tab1, .post-tab .tab3 {
@@ -257,6 +247,11 @@ main {
 
 .post{
   display: none;
+}
+
+.selected{
+  background-color: #173c68;
+  transition: .3S;
 }
 
 .show {
@@ -446,41 +441,66 @@ main {
 
 .Form {
   padding-top: 20px;
-  border-radius: 5px; /* 角を丸める */
+  border-radius: 5px;
 }
 
-/* フォーム項目のスタイル */
 .Form-Item {
-  margin-bottom: 20px; /* 各フォーム項目の下に余白を追加 */
+  margin-bottom: 20px;
 }
 
-/* 必須ラベルのスタイル */
 .Form-Item-Label {
   padding-bottom: 10px;
 }
 
-/* フォーム入力フィールドのスタイル */
 .wpcf7-form-control {
-  width: 100%; /* 入力フィールドを幅いっぱいに広げる */
-  padding: 10px; /* 内側の余白を追加 */
-  border: 1px solid #ccc; /* ボーダーを追加 */
-  border-radius: 3px; /* 角を丸める */
-  box-sizing: border-box; /* ボックスサイジングを設定 */
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  box-sizing: border-box; 
 }
 
-/* 送信ボタンのスタイル */
 .wpcf7-submit {
-  background-color: #235C9B; /* ボタンの背景色を青にする */
-  color: white; /* テキストの色を白にする */
-  border: none; /* ボーダーをなくす */
-  padding: 10px 20px; /* 上下左右の余白を追加 */
-  border-radius: 3px; /* 角を丸める */
-  cursor: pointer; /* カーソルをポインターに変更 */
+  background-color: #235C9B;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 3px;
+  cursor: pointer;
 }
 
-/* チェックボックスのスタイル */
 .wpcf7-checkbox {
-  margin-right: 10px; /* チェックボックス間の間隔を追加 */
+  margin-right: 10px;
+}
+
+.pagination{
+  margin:40px 0 0;
+  text-align: center;
+}
+.nav-links{
+  display:flex;
+}
+.pagination .page-numbers{
+  display:inline-block;
+  margin-right:20px;
+  padding:20px 25px;
+  color:#333;
+  border-radius:100px;
+  box-shadow: 0 4px 15px rgba(172, 172, 172, 0.2);
+  background:#fff;
+}
+.pagination .current{
+  padding:20px 25px;
+  background:#235c9b;
+  color:#fff;
+}
+.pagination .prev,
+.pagination .next{
+  color:#235c9b;
+}
+.pagination .dots{
+  background:transparent;
+  box-shadow:none;
 }
 
 
@@ -559,12 +579,12 @@ html {
 }
 
 .breadcrumb li {
-  display: inline; /*横に並ぶように*/
+  display: inline; 
   list-style: none;
-  font-weight: bold; /*太字*/
+  font-weight: bold;
 }
 
-.breadcrumb li:after { /* >を表示*/
+.breadcrumb li:after {
   content: ">";
   padding: 0 0.2em;
   color: #555;
@@ -576,7 +596,7 @@ html {
 
 .breadcrumb li a {
   text-decoration: none;
-  color: #000000; /*色*/
+  color: #000000;
 }
 
 .breadcrumb li a:hover {
@@ -610,4 +630,4 @@ div.article-head div.thum img {
   object-fit: cover;
   width: 100%;
   height: auto;
-}/*# sourceMappingURL=style.css.map */
+}
