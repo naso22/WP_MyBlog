@@ -27,7 +27,7 @@
 
     <div class="content">
         <div class="content__inner">
-            <main>
+            <main class="post-main">
                 <div class="post-tab">
                     <div class="tab1 tab-title selected">最新記事</div>
                     <div class="tab2 tab-title">人気記事</div>
@@ -76,12 +76,16 @@
                                         </article>
                                     </a>
                                 </div>
-                        <?php
-                            endwhile;
-                        else :
-                            echo '<div><p>ありません。</p></div>';
-                        endif;
-                        ?>
+                            <?php endwhile; ?>
+
+                            <?php wp_reset_postdata(); ?>
+                        <?php else : ?>
+                            <div>
+                                <p>まだ記事はありません。</p>
+                            </div>
+                        <?php endif; ?>
+
+
                         </ul>
                     </div>
 
@@ -152,6 +156,7 @@
                                 </div>
                             <?php endwhile; ?>
                             <?php wp_reset_postdata(); ?>
+                            <p class="post__more-btn">人気記事をもっと見る</p>
                         <?php else : ?>
                             <div>
                                 <p>まだ記事はありません。</p>
@@ -198,13 +203,21 @@
                                         </article>
                                     </a>
                                 </div>
-                        <?php endforeach;
-                            wp_reset_postdata();
-                        else :
-                            echo '<p>まだ記事はありません。</p>';
-                        endif;
-                        ?>
+                            <?php endforeach;
+                            wp_reset_postdata(); ?>
                     </div>
+                    <?php
+                            $category = get_category_by_slug('プログラミング');
+                            if ($category) {
+                                $category_link = get_category_link($category->term_id);
+                    ?>
+                        <p class="post__more-btn"><a href="<?php echo esc_url($category_link); ?>">プログラミング記事をもっと見る</a></p>
+                    <?php } ?>
+                <?php else : ?>
+                    <div>
+                        <p>まだ記事はありません。</p>
+                    </div>
+                <?php endif; ?>
                 </div>
 
 
@@ -245,14 +258,21 @@
                                         </article>
                                     </a>
                                 </div>
-                            <?php
-                            endforeach;
-                            wp_reset_postdata();
-                        else :
-                            ?>
-                            <p>まだ記事はありません。</p>
-                        <?php endif; ?>
+                            <?php endforeach;
+                            wp_reset_postdata(); ?>
                     </div>
+                    <?php
+                            $category = get_category_by_slug('デザイン');
+                            if ($category) {
+                                $category_link = get_category_link($category->term_id);
+                    ?>
+                        <p class="post__more-btn"><a href="<?php echo esc_url($category_link); ?>">デザイン記事をもっと見る</a></p>
+                    <?php } ?>
+                <?php else : ?>
+                    <div>
+                        <p>まだ記事はありません。</p>
+                    </div>
+                <?php endif; ?>
                 </div>
 
 
