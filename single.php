@@ -10,30 +10,8 @@
 
     <div class="content">
         <div class="content__inner">
-            <main class="post-main">
-                <ol class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
-                    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-                        <a itemprop="item" href="ホームのURL">
-                            <span itemprop="name">ホーム</span>
-                        </a>
-                        <meta itemprop="position" content="1" />
-                    </li>
-
-                    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-                        <a itemprop="item" href="カテゴリー1のURL">
-                            <span itemprop="name">カテゴリー1</span>
-                        </a>
-                        <meta itemprop="position" content="2" />
-                    </li>
-
-                    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-                        <a itemprop="item" href="カテゴリー2のURL">
-                            <span itemprop="name">カテゴリー2</span>
-                        </a>
-                        <meta itemprop="position" content="3" />
-                    </li>
-                </ol>
-
+            <main class="post-main single-main">
+            <?php breadcrumb(); ?>
                 <section>
                     <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
                             <article class="article__wrapper">

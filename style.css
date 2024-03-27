@@ -276,7 +276,7 @@ main {
 
 .post__inner {
   display: grid;
-  gap: 1.5rem;
+  gap: 2rem 1.5rem;
   grid-template-columns: repeat(2, 1fr);
 }
 
@@ -340,12 +340,12 @@ main {
   color: #689bd6;
 }
 
-.post-main {
-  margin-top: 3em;
+.category-main{
+  margin-top: 1.7em;
 }
 
-.category-main{
-  margin-top: 2em;
+.single-main{
+  margin-top: 2.5em;
 }
 
 .post__more-btn{
@@ -364,6 +364,10 @@ main {
 
 .post__more-btn:hover{
   background-color: #173c68;
+}
+
+.pagination .nav-links {
+  display: block;
 }
 
 @media screen and (max-width: 780px) {

@@ -7,33 +7,31 @@
 </header>
 
 <body>
-
     <div class="content">
-        <div class="content__inner">
+        <div class="content__inner content__container">
             <main class="post-main category-main">
-                <?php
-                $cat = get_the_category();
-                $catname = $cat[0]->cat_name;
-                ?>
                 <div class="article-head">
-                    <h1>
-                        <?php echo $catname; ?>の記事一覧
-                    </h1>
+                    <?php breadcrumb(); ?>
+                    <h1><?php single_cat_title(); ?>記事の一覧</h1>
                 </div>
-
                 <div class="post show">
                     <div class="post__inner">
                         <?php
                         $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
+                        $current_category = single_cat_title('', false); // 現在のカテゴリー名を取得
+
                         $args = array(
-                            'category_name' => $catname,
-                            'posts_per_page' => 10,
-                            'paged' => $paged
+                            'post_type' => 'post',
+                            'posts_per_page' => 10, // 最大表示数を10に設定
+                            'paged' => $paged,
+                            'category_name' => $current_category // 現在のカテゴリー名を使用
                         );
+
                         $query = new WP_Query($args);
+
+                        if ($query->have_posts()) :
+                            while ($query->have_posts()) : $query->the_post();
                         ?>
-                        <?php if ($query->have_posts()) : ?>
-                            <?php while ($query->have_posts()) : $query->the_post(); ?>
                                 <div class="l-wrapper_02 card-radius_02">
                                     <a href="<?php the_permalink(); ?>">
                                         <article class="card_02">
@@ -60,23 +58,34 @@
                                         </article>
                                     </a>
                                 </div>
-                            <?php endwhile; ?>
-                            <?php wp_reset_postdata(); ?>
+                        <?php
+                            endwhile;
+                        endif;
+                        wp_reset_postdata();
+                        ?>
                     </div>
                 </div>
-
-                <?php
-                            if (function_exists("pagination")) {
-                                pagination($wp_query->max_num_pages);
-                            }
-                ?>
-            <?php endif; ?>
+                <div class="pagination">
+                    <?php
+                    if ($query->max_num_pages > 1) { // 投稿が複数ページに渡る場合にのみページネーションを表示
+                        $args = array(
+                            'mid_size' => 1,
+                            'prev_text' => '&lt;',
+                            'next_text' => '&gt;',
+                            'screen_reader_text' => ' ',
+                        );
+                        the_posts_pagination($args);
+                    }
+                    ?>
+                </div>
             </main>
 
             <?php get_sidebar(); ?>
-
-        </div>
+        </div><!-- /content__inner -->
     </div>
+    <?php get_footer(); ?>
+
+    <?php get_sidebar(); ?>
     <?php get_footer(); ?>
 </body>
 
