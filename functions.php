@@ -4,9 +4,7 @@ function wpcf7_autop_return_false()
 {
   return false;
 }
-?>
 
-<?php
 add_action('parse_query', 'my_parse_query');
 function my_parse_query($query)
 {
@@ -14,9 +12,7 @@ function my_parse_query($query)
     $query->query_vars['paged'] = $query->query_vars['page'];
 }
 
-?>
 
-<?php
 function category_link_custom($query = array())
 {
   if (isset($query['name']) && $query['name'] === 'page' && isset($query['page'])) {
@@ -30,9 +26,7 @@ function category_link_custom($query = array())
   return $query;
 }
 add_filter('request', 'category_link_custom');
-?>
 
-<?php
 function breadcrumb()
 {
 ?>
